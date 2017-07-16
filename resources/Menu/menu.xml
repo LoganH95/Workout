@@ -1,0 +1,13 @@
+<resources>
+	<menu id="MainMenu">
+    	<menu-item id="Time">Set Time</menu-item>
+    	<menu-item id="Reps">Repeat</menu-item>
+    	<menu-item id="Rest">Rest</menu-item>
+    	<menu-item id="Restart">Restart</menu-item>
+	</menu>
+    
+    <menu id="OnOffMenu">
+    	<menu-item id="On">On</menu-item>
+    	<menu-item id="Off">Off</menu-item>
+	</menu>
+</resources>

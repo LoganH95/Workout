@@ -1,0 +1,4 @@
+<resources>
+    <string id="AppName">Workout</string>
+    <string id="timeSeparator">:</string>
+</resources>
