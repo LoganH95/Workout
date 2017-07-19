@@ -3,22 +3,34 @@ using Toybox.WatchUi as Ui;
 class ViewController extends Ui.BehaviorDelegate {
 	hidden var title, view, parentViewController; 
 	
+	//Initialization
+	
 	function initialize() {
 		BehaviorDelegate.initialize();
 		title = ""; 
 		view = new IQView(self);
 	}
 	
+	//View Life Cycle
+	
 	function reloadView() {
 		 Ui.requestUpdate(); 
 	}
 	
-	function viewDidLoad(dc) {
-		//Subclass can override to provide functionallity
+	function viewDidLoad() {
+		//Subclass can override to provide functionallity; 
 	}
 	
-	function viewDidAppear(dc) {
-		//Subclass can override to provide functionallity
+	function viewDidAppear() {
+		//Subclass can override to provide functionallity; 
+	}
+	
+	function viewWillUpdate(dc) {
+		//Subclass can override to provide functionallity; 
+	}
+	
+	function viewDidDisappear() {
+		//Subclass can override to provide functionallity; 
 	}
 	
 	function getView() {

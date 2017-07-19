@@ -8,10 +8,15 @@ class WorkoutTimerViewController extends ViewController {
 		view = new WorkoutView(self);
 	}
 	
-	function viewDidLoad(dc) {
+	//View Life Cycle
+	
+	function viewDidLoad() {
 		settings = new WorkoutTimerSettings();
 		workoutTimer = new WorkoutTimer(settings); 
     	timer = new Timer.Timer();
+	}
+	
+	function viewWillUpdate(dc) {
     	settings.fetchSettings();
 	}
 	
