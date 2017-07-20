@@ -1,6 +1,7 @@
 using Toybox.WatchUi as Ui;
 
 class ViewController extends Ui.BehaviorDelegate {
+
 	hidden var title, view, parentViewController; 
 	
 	//Initialization

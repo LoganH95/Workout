@@ -1,6 +1,7 @@
 using Toybox.WatchUi as Ui;
 
 class WorkoutTimerViewController extends ViewController {
+
 	hidden var timer, workoutTimer, settings;
 	
 	function initialize() {
@@ -112,7 +113,7 @@ class WorkoutTimerViewController extends ViewController {
     	if (workoutTimer.isFinishing) {
         	Attention.vibrate([new Attention.VibeProfile(10, 800)]);
         }
-    } 
+    }
     
     //Menu Delegate
     

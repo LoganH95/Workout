@@ -1,6 +1,7 @@
 using Toybox.Application as App;
 
 class WorkoutTimerSettings {
+
 	hidden var startingSeconds, repeat, rest, restTime;
 	
 	function fetchSettings() {

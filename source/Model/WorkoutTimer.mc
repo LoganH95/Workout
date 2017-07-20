@@ -55,7 +55,7 @@ class WorkoutTimer {
 			isRunning = false; 
 		} else if (type == timer_type) {
 			reps += 1; 
-		} 
+		}
 		
 		if (repeat && settings.getRest()) {
 			swapTimer(); 

@@ -2,6 +2,7 @@ using Toybox.Graphics as Gfx;
 using Toybox.WatchUi as Ui;
 
 class NumberFactory extends Ui.PickerFactory {
+
     hidden var mStart;
     hidden var mStop;
     hidden var mIncrement;

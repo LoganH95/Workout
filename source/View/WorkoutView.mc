@@ -2,10 +2,11 @@ using Toybox.Graphics as Gfx;
 using Toybox.System as Sys;
 
 class WorkoutView extends IQView {
-	var x;
-	var restY;
-	var timeY;
-	var repsY;
+
+	hidden var x;
+	hidden var restY;
+	hidden var timeY;
+	hidden var repsY;
 	
 	function initialize(delegate) {
 		IQView.initialize(delegate); 

@@ -2,6 +2,7 @@ using Toybox.WatchUi as Ui;
 using Toybox.Graphics as Gfx;
 
 class IQView extends Ui.View {
+
 	hidden var delegate, viewLoaded;
 	hidden var height, width;
 	

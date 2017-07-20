@@ -28,6 +28,7 @@ class TimePicker extends Ui.Picker {
 }
 
 class TimePickerDelegate extends Ui.PickerDelegate {
+
 	hidden var delegate;
 
 	function initialize(delegate) {
@@ -52,6 +53,7 @@ class TimePickerDelegate extends Ui.PickerDelegate {
 }
 
 class RestPickerDelegate extends Ui.PickerDelegate {
+
 	hidden var delegate;
 
 	function initialize(delegate) {

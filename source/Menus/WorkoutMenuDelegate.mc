@@ -2,6 +2,7 @@ using Toybox.WatchUi as Ui;
 using Toybox.Application as App;
 
 class WorkoutMenuDelegate extends Ui.MenuInputDelegate {
+
 	hidden var delegate;
 	
 	function initialize(delegate) {
@@ -10,15 +11,20 @@ class WorkoutMenuDelegate extends Ui.MenuInputDelegate {
     }
 
     function onMenuItem(item) {
-        if (item == :Time) {
-    		Ui.pushView(new TimePicker(), new TimePickerDelegate(self), Ui.SLIDE_IMMEDIATE);
-        } else if (item == :Reps) {
-            Ui.pushView(new Rez.Menus.OnOffMenu(), new RepsConfirmationDelegate(self), Ui.SLIDE_IMMEDIATE);
-        } else if (item == :Rest) {
-            Ui.pushView(new Rez.Menus.OnOffMenu(), new RestConfirmationDelegate(self), Ui.SLIDE_IMMEDIATE);
-        } else if (item == :Restart) {
-        	notifyDelegateSettingsDidChange();
-        }
+    	switch (item) {
+    		case :Time:
+    			Ui.pushView(new TimePicker(), new TimePickerDelegate(self), Ui.SLIDE_IMMEDIATE);
+    			break;
+    		case :Reps:
+    			Ui.pushView(new Rez.Menus.OnOffMenu(), new RepsConfirmationDelegate(self), Ui.SLIDE_IMMEDIATE);
+    			break;
+    		case :Rest:
+    			Ui.pushView(new Rez.Menus.OnOffMenu(), new RestConfirmationDelegate(self), Ui.SLIDE_IMMEDIATE);
+    			break;
+    		case :Restart:
+    			notifyDelegateSettingsDidChange();
+    			break;
+    	}
     }
     
     function getDelegate() {
@@ -30,20 +36,18 @@ class WorkoutMenuDelegate extends Ui.MenuInputDelegate {
     }
 }
 
-class RepsConfirmationDelegate extends Ui.MenuInputDelegate {
+class OnOffConfirmationDelegate extends Ui.MenuInputDelegate {
+
 	hidden var delegate;
 
-     function initialize(delegate) {
+     function initialize(delegate, property) {
         MenuInputDelegate.initialize();
         self.delegate = delegate.weak();
+        self.property = property;
     }
 
     function onMenuItem(item) {
-        if (item == :On) {
-            App.getApp().setProperty("reps", true);
-        } else if (item == :Off) {
-            App.getApp().setProperty("reps", false);
-        }
+        App.getApp().setProperty("reps", item == :On);
         getDelegate().notifyDelegateSettingsDidChange();
     }
     
@@ -53,19 +57,18 @@ class RepsConfirmationDelegate extends Ui.MenuInputDelegate {
 }
 
 class RestConfirmationDelegate extends Ui.MenuInputDelegate {
+
 	hidden var delegate;
 
-     function initialize(delegate) {
-        MenuInputDelegate.initialize();
+    function initialize(delegate) {
+    	MenuInputDelegate.initialize();
         self.delegate = delegate.weak();
     }
 
     function onMenuItem(item) {
+        App.getApp().setProperty("rest", item == :On);
         if (item == :On) {
-            App.getApp().setProperty("rest", true);
-            Ui.pushView(new TimePicker(), new RestPickerDelegate(getDelegate()), Ui.SLIDE_IMMEDIATE); 
-        } else if (item == :Off) {
-            App.getApp().setProperty("rest", false);
+        	 Ui.pushView(new TimePicker(), new RestPickerDelegate(getDelegate()), Ui.SLIDE_IMMEDIATE); 
         }
         getDelegate().notifyDelegateSettingsDidChange();
     }
