@@ -4,6 +4,8 @@ using Toybox.Application as App;
 class WorkoutMenuDelegate extends Ui.MenuInputDelegate {
 
 	hidden var delegate;
+	hidden const REPS_PROPERTY = "reps";
+	hidden const REST_PROPERTY = "rest";
 	
 	function initialize(delegate) {
         MenuInputDelegate.initialize();
@@ -16,10 +18,10 @@ class WorkoutMenuDelegate extends Ui.MenuInputDelegate {
     			Ui.pushView(new TimePicker(), new TimePickerDelegate(self), Ui.SLIDE_IMMEDIATE);
     			break;
     		case :Reps:
-    			Ui.pushView(new Rez.Menus.OnOffMenu(), new RepsConfirmationDelegate(self), Ui.SLIDE_IMMEDIATE);
+    			Ui.pushView(new Rez.Menus.OnOffMenu(), new OnOffConfirmationDelegate(self, REPS_PROPERTY), Ui.SLIDE_IMMEDIATE);
     			break;
     		case :Rest:
-    			Ui.pushView(new Rez.Menus.OnOffMenu(), new RestConfirmationDelegate(self), Ui.SLIDE_IMMEDIATE);
+    			Ui.pushView(new Rez.Menus.OnOffMenu(), new OnOffConfirmationDelegate(self, REST_PROPERTY), Ui.SLIDE_IMMEDIATE);
     			break;
     		case :Restart:
     			notifyDelegateSettingsDidChange();
@@ -31,6 +33,19 @@ class WorkoutMenuDelegate extends Ui.MenuInputDelegate {
     	return delegate.get();
     }	
     
+    function notifyDelegateValueTurnedOn(property) {
+    	switch (property) {
+    		case REPS_PROPERTY:
+    			//DO NOTHING
+    			return;
+    		case REST_PROPERTY:
+        		Ui.pushView(new TimePicker(), new RestPickerDelegate(self), Ui.SLIDE_IMMEDIATE); 
+    		default:
+    			//DO NOTHING
+    			return;
+    	}
+    }
+    
     function notifyDelegateSettingsDidChange() {
     	getDelegate().settingsDidChange();
     }
@@ -39,6 +54,7 @@ class WorkoutMenuDelegate extends Ui.MenuInputDelegate {
 class OnOffConfirmationDelegate extends Ui.MenuInputDelegate {
 
 	hidden var delegate;
+	hidden var property;
 
      function initialize(delegate, property) {
         MenuInputDelegate.initialize();
@@ -47,7 +63,11 @@ class OnOffConfirmationDelegate extends Ui.MenuInputDelegate {
     }
 
     function onMenuItem(item) {
-        App.getApp().setProperty("reps", item == :On);
+    	var value = item == :On;
+        App.getApp().setProperty(property, value);
+        if (value) {
+        	getDelegate().notifyDelegateValueTurnedOn(property);
+        }
         getDelegate().notifyDelegateSettingsDidChange();
     }
     
