@@ -15,11 +15,12 @@ class WorkoutView extends IQView {
     function onLayout(dc) {
         IQView.onLayout(dc);
 		x = width/2; 
-		if (Sys.getDeviceSettings().screenShape == Sys.SCREEN_SHAPE_ROUND) {
-			restY = height * 3 /4 - 5;
-        	timeY = height/4;
-        	repsY = height/4 - 25;
-    	} else if (Sys.getDeviceSettings().screenShape == Sys.SCREEN_SHAPE_SEMI_ROUND) {
+		var screenShape = Sys.getDeviceSettings().screenShape;
+		if (screenShape == Sys.SCREEN_SHAPE_ROUND) {
+			restY = height * 3 /4 + 5;
+        	timeY = height/4 + 10;
+        	repsY = height/4 - 15;
+    	} else if (screenShape == Sys.SCREEN_SHAPE_SEMI_ROUND) {
         	restY = height * 3 /4;
         	timeY = height/2 - 50;
         	repsY = height/2 - 70;
